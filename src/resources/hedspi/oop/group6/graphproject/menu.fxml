@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onDrawButtonClick" prefHeight="555.0" prefWidth="911.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hedspi.oop.group6.Controller.GraphController">
+   <children>
+      <Label contentDisplay="CENTER" text="Graph Visualization">
+         <font>
+            <Font name="Segoe UI Bold" size="35.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="40.0" />
+         </VBox.margin>
+      </Label>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="drawGraph" mnemonicParsing="false" onMouseClicked="#onDrawButtonClick" text="Draw Graph">
+               <font>
+                  <Font name="Segoe UI" size="18.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="200.0" />
+               </HBox.margin>
+            </Button>
+            <ChoiceBox fx:id="chooseExGraph" onMouseClicked="#OnChooseAction" prefWidth="150.0" />
+         </children>
+         <VBox.margin>
+            <Insets top="100.0" />
+         </VBox.margin>
+      </HBox>
+      <Label fx:id="testLabel" text="Label">
+         <font>
+            <Font name=".VnAristote Medium" size="48.0" />
+         </font>
+      </Label>
+   </children>
+</VBox>
