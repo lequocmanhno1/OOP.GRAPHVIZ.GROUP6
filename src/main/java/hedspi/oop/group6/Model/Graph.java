@@ -38,7 +38,7 @@ public class Graph {
     public void addEdge(int from, int to) {
         Vertex f = findVertex(from);
         Vertex t = findVertex(to);
-        this.listOfEdges.add(new Edge(f, t, 1));
+        this.listOfEdges.add(new Edge(f, t));
     }
 
     public void addEdge(Edge Edge) {
@@ -126,8 +126,7 @@ public class Graph {
         Vertex to = findVertex(t);
 //        System.out.println("Enter Edge weight: ");
 //        int weight = Integer.parseInt(sc.nextLine());
-        int weight = 1;
-        return new Edge(from, to, weight);
+        return new Edge(from, to);
     }
 
     public void removeAllOfGraph() {

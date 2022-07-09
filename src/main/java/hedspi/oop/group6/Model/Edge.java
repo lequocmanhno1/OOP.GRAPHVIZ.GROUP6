@@ -1,26 +1,17 @@
 package hedspi.oop.group6.Model;
 
-public class Edge {
+public class Edge implements Comparable<Edge>{
     private Vertex from;
     private Vertex to;
-    private int weight;
 
     public Edge() {
     }
 
-    public Edge(Vertex from, Vertex to, int weight) {
+    public Edge(Vertex from, Vertex to) {
         this.from = from;
         this.to = to;
-        this.weight = weight;
     }
 
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
 
     public Vertex getFrom() {
         return from;
@@ -40,6 +31,18 @@ public class Edge {
     
     @Override
     public String toString(){
-        return "Edge: " + this.getFrom() + " - " + this.getTo() + " : " + this.getWeight();
+        return "Edge: " + this.getFrom() + " - " + this.getTo();
+    }
+
+    @Override
+    public int compareTo(Edge o) {
+        Integer vfrom1_id = this.from.getVertexId();
+        Integer vfrom2_id = o.from.getVertexId();
+        int result1 = vfrom1_id.compareTo(vfrom2_id);
+        if(result1 != 0 ) return result1;
+        Integer vto1_id = this.to.getVertexId();
+        Integer vto2_id = o.to.getVertexId();
+        int result2 = vto1_id.compareTo(vto2_id);
+        return result2;
     }
 }

@@ -4,16 +4,16 @@ import hedspi.oop.group6.Model.Edge;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
 
-public class Arrow extends Path{
+public class DirectedEdgeFX extends EdgeFX {
     private static final double defaultArrowHeadSize = 7;
 
-    private NodeFX vertexFrom;
-    private NodeFX vertexTo;
 
-    public Arrow(NodeFX vertexFrom, NodeFX vertexTo){
-        super();
+    public DirectedEdgeFX(NodeFX vertexFrom, NodeFX vertexTo){
+        super(vertexFrom, vertexTo);
+        this.vertexFrom = vertexFrom;
+        this.vertexTo = vertexTo;
+        this.edge = new Edge(vertexFrom.getVertex(), vertexTo.getVertex());
         double startX  = vertexFrom.getCenterX();
         double startY = vertexFrom.getCenterY();
         double endX = vertexTo.getCenterX();

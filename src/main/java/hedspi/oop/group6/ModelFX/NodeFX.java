@@ -12,6 +12,10 @@ public class NodeFX extends Circle{
     Vertex vertex;
     Label label;
 
+    public Vertex getVertex() {
+        return vertex;
+    }
+
     public NodeFX(double x, double y, double rad, Vertex vertex, String name){
         super(x, y, rad);
         this.vertex = vertex;
