@@ -3,6 +3,7 @@ package hedspi.oop.group6.Controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXNodesList;
 import com.jfoenix.controls.JFXToggleButton;
+import hedspi.oop.group6.Model.Edge;
 import hedspi.oop.group6.Model.Graph;
 import hedspi.oop.group6.Model.Vertex;
 import hedspi.oop.group6.ModelFX.DirectedEdgeFX;
@@ -120,6 +121,22 @@ public class Drawing implements Initializable {
     @FXML
     private Pane viewer;
 
+    @FXML
+    private Button runBtn;
+
+    @FXML
+    void runAlgo(ActionEvent event){
+        if (sourceAlgo ==-1) {
+            algorithm.setSourceVertex(g.findVertex(0));
+        } else {
+            algorithm.setSourceVertex(g.findVertex(sourceAlgo));
+        }
+        Collections.sort(algorithm.getGraph().getListOfEdges());
+//        g.printGraph();
+        context.setAlgorithm(algorithm);
+        context.run();
+    }
+
     int nNode = 0;
     NodeFX selectedNode = null;
     List<NodeFX> vertexes = new ArrayList<>();
@@ -128,6 +145,7 @@ public class Drawing implements Initializable {
     boolean addNode = true, addEdge = false, calculate = false,
             calculated = false, playing = false, paused = false, pinned = false;
 
+    private Algorithm algorithm;
 
     @FXML
     void AddHandle(ActionEvent event){
@@ -145,21 +163,27 @@ public class Drawing implements Initializable {
     private Graph g = new Graph();
     @FXML
     void BfsHandle(ActionEvent event) {
-        Algorithm algorithm = new BFS(g);
+        algorithm = new BFS(g);
 
-
-
-        algorithm.setSourceVertex(g.findVertex(sourceAlgo));
-        context.setAlgorithm(algorithm);
-        context.run();
+//        algorithm.setSourceVertex(g.findVertex(sourceAlgo));
+//        context.setAlgorithm(algorithm);
+//        context.run();
     }
 
     @FXML
     void BitHandle(ActionEvent event) {
-        Algorithm test = new BipartiteGraph(g);
-        test.setSourceVertex(g.findVertex(sourceAlgo));
-        context.setAlgorithm(test);
-        context.run();
+        algorithm = new BipartiteGraph(g);
+//        test.setSourceVertex(g.findVertex(sourceAlgo));
+//        context.setAlgorithm(test);
+//        context.run();
+    }
+
+    @FXML
+    void SccHandle(ActionEvent event) {
+        algorithm = new SCC(g);
+//        test2.setSourceVertex(g.findVertex(sourceAlgo));
+//        context.setAlgorithm(test2);
+//        context.run();
     }
 
     @FXML
@@ -185,13 +209,7 @@ public class Drawing implements Initializable {
         nNode = 0;
     }
 
-    @FXML
-    void SccHandle(ActionEvent event) {
-        Algorithm test2 = new SCC(g);
-        test2.setSourceVertex(g.findVertex(sourceAlgo));
-        context.setAlgorithm(test2);
-        context.run();
-    }
+
 
     private int sourceAlgo=-1;
 
