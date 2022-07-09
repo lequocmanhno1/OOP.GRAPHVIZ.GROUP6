@@ -65,10 +65,7 @@ public class Drawing implements Initializable {
     private Pane border;
 
     @FXML
-    private ImageView canvasBack;
-
-    @FXML
-    private JFXButton canvasBackButton;
+    private Button showHidden;
 
     @FXML
     private Group canvasGroup;
@@ -156,6 +153,11 @@ public class Drawing implements Initializable {
         if(addEdgeButton.isSelected()) {
             addVertexButton.setSelected(false);
         }
+//        if (nNode ==0 || addVertexButton.isSelected() || addEdgeButton.isSelected()){
+//            runBtn.setDisable(true);
+//        } else {
+//            runBtn.setDisable(false);
+//        }
     }
 
     private Context context = new Context();
@@ -285,7 +287,6 @@ public class Drawing implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
             openHidden.setImage(getImage("openHidden.png"));
-            canvasBack.setImage(getImage("arrow_back_black_96x96.png"));
             playPauseImage.setImage(getImage("pause_black_48x48.png"));
             FastForwardImage.setImage(getImage("fast_forward_black_48x48.png"));
             choiceExGraph.getItems().addAll(ExGraph);

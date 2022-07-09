@@ -35,25 +35,8 @@
                         <Cursor fx:constant="CROSSHAIR" />
                     </cursor>
                 </HiddenSidesPane>
-                <ImageView fx:id="openHidden" fitHeight="44.0" fitWidth="44.0" layoutX="856.0" layoutY="289.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="287.0" AnchorPane.rightAnchor="-8.0" AnchorPane.topAnchor="289.0">
-                    <image>
-                        <Image url="@../../../../images/openHidden.png" />
-                    </image>
-               <cursor>
-                  <Cursor fx:constant="CLOSED_HAND" />
-               </cursor>
-                </ImageView>
                 <AnchorPane prefHeight="580.0" prefWidth="200.0" style="-fx-background-color: #3b5998;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <JFXButton fx:id="canvasBackButton" contentDisplay="GRAPHIC_ONLY" prefHeight="30.0" prefWidth="34.0">
-                            <graphic>
-                                <ImageView fx:id="canvasBack" fitHeight="29.0" fitWidth="28.0" pickOnBounds="true">
-                                    <image>
-                                        <Image url="@../../../../images/arrow_back_black_96x96.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                        </JFXButton>
                         <HBox alignment="CENTER" layoutX="10.0" layoutY="519.0" prefHeight="61.0" prefWidth="181.0" spacing="10.0" AnchorPane.bottomAnchor="0.0">
                             <children>
                                 <JFXButton fx:id="clearButton" buttonType="RAISED" onAction="#ClearHandle" prefHeight="31.0" prefWidth="76.0" style="-fx-background-color: #21759b;" text="CLEAR" textFill="#d3c5c5">
@@ -192,6 +175,21 @@
                       <cursor>
                           <Cursor fx:constant="CROSSHAIR" />
                       </cursor>
+               <children>
+                      <ImageView fx:id="openHidden" fitHeight="44.0" fitWidth="65.0" layoutX="661.0" layoutY="297.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                              <Image url="@../../../../images/openHidden.png" />
+                          </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                      </ImageView>
+                  <JFXButton fx:id="showHidden" layoutX="675.0" layoutY="308.0" text=" ">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+               </children>
                   </Pane>
               </children>
           </Group>
