@@ -126,6 +126,9 @@ public class Drawing implements Initializable {
     @FXML
     private Button runBtn;
 
+    @FXML
+    private HiddenController hiddenController;
+
 
     @FXML
     void runAlgo(ActionEvent event) {
@@ -140,7 +143,7 @@ public class Drawing implements Initializable {
 
         context.setEdges(mstEdges);
         context.setVertexes(vertexes);
-
+        context.setHiddenController(hiddenController);
 
 //        context.visualize();
 
@@ -296,6 +299,7 @@ public class Drawing implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        hiddenController = fxmlLoader.getController();
 
     }
 

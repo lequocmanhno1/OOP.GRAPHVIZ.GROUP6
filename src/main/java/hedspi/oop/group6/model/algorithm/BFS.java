@@ -82,9 +82,7 @@ public class BFS extends Algorithm {
                 Visit.add(s);
             }
             String s16 = ((DetailStep) super.getListOfSteps().get(8)).toStringV(s);
-//            String a16 = super.getListOfSteps().get(2).toString();
-            s15 = s15.concat(s16);
-//            a15 = a15.concat(a16);
+            s15 = s15.concat("\n" + s16);
 
             DetailStep detailStep2 = new DetailStep();
             detailStep2.setDetail(s15);
@@ -111,15 +109,11 @@ public class BFS extends Algorithm {
 
                     if (!checkVisit(Visit, super.getGraph().getListOfEdges().get(i).getTo())) {
                         if (!Queue.contains(super.getGraph().getListOfEdges().get(i).getTo())) {
-//                            String s9 = ((DetailStep) super.getListOfSteps().get(9)).toStringE(super.getGraph().getListOfEdges().get(i));
-
-//                            System.out.println(s9);
 
                             String s10 = ((DetailStep) super.getListOfSteps().get(10)).toStringV(super.getGraph().getListOfEdges().get(i).getTo())
                                     + super.getListOfSteps().get(11);
                             System.out.println(s10);
 
-//                            s9 = s9.concat(s10);
 
                             VertexStep detailStep5 = new VertexStep();
                             detailStep5.setDetail(s10);
@@ -133,16 +127,12 @@ public class BFS extends Algorithm {
                             Queue.add(super.getGraph().getListOfEdges().get(i).getTo());
 
                         } else {
-//                            String s9 = ((DetailStep) super.getListOfSteps().get(9)).toStringE(super.getGraph().getListOfEdges().get(i));
-//                            System.out.println(s9);
                             String s10 = ((DetailStep) super.getListOfSteps().get(10)).toStringV(super.getGraph().getListOfEdges().get(i).getTo())
                                     + super.getListOfSteps().get(12);
                             System.out.println(s10);
-//                            s9 = s9.concat(s10);
 
                             DetailStep detailStep6 = new DetailStep();
                             detailStep6.setDetail(s10);
-//                            detailStep6.setVertex(super.getGraph().getListOfEdges().get(i).getTo());
                             algorithmResult.addDetailStep(detailStep6);
 
                             PseudoStep pseudoStep6 = new PseudoStep();
@@ -151,12 +141,9 @@ public class BFS extends Algorithm {
                             algorithmResult.addPseudoStep(pseudoStep6);
                         }
                     } else {
-//                        String s9 = ((DetailStep) super.getListOfSteps().get(9)).toStringE(super.getGraph().getListOfEdges().get(i));
-//                        System.out.println(s9);
                         String s10 = ((DetailStep) super.getListOfSteps().get(10)).toStringV(super.getGraph().getListOfEdges().get(i).getTo())
                                 + super.getListOfSteps().get(12);
                         System.out.println(s10);
-//                        s9 = s9.concat(s10);
 
                         DetailStep detailStep6 = new DetailStep();
                         detailStep6.setDetail(s10);
@@ -166,26 +153,28 @@ public class BFS extends Algorithm {
                         pseudoStep6.setComporseStep(super.getListOfSteps().get(4).toString());
                         System.out.println(pseudoStep6.getComporseStep());
                         algorithmResult.addPseudoStep(pseudoStep6);
-//                        System.out.println(((DetailStep)super.getListOfSteps().get(9)).toStringE(super.getGraph().getListOfEdges().get(i)));
-//                        System.out.println(((DetailStep)super.getListOfSteps().get(10)).toStringV(super.getGraph().getListOfEdges().get(i).getTo())
-//                            + super.getListOfSteps().get(12));
-//                        System.out.println(super.getListOfSteps().get(4).toString());
                     }
                 }
             }
             Queue.poll();
         }
+        String finalResult = ((DetailStep) super.getListOfSteps().get(13)).toStringV(super.getSourceVertex()) + super.getListOfSteps().get(14);
         DetailStep detailStep7 = new DetailStep();
-        detailStep7.setDetail(((DetailStep) super.getListOfSteps().get(13)).toStringV(super.getSourceVertex()) + super.getListOfSteps().get(14));
-        System.out.println(detailStep7.getDetail());
-        System.out.print(" Ket qua duyet BFS ");
+        System.out.println(finalResult);
+        System.out.print("\nKet qua duyet BFS ");
+        finalResult = finalResult.concat("\nKet qua duyet BFS ");
         for (int i = 0; i < Visit.size(); i++) {
             System.out.print(Visit.get(i).getVertexId());
+            finalResult = finalResult.concat(String.valueOf(Visit.get(i).getVertexId()));
             if (i != (Visit.size() - 1)) {
                 System.out.print("->");
+                finalResult = finalResult.concat("->");
             }
         }
+        finalResult = finalResult.concat("\n");
         System.out.println("");
+        detailStep7.setDetail(finalResult);
+        algorithmResult.setFinalResult(detailStep7);
         return algorithmResult;
     }
 }

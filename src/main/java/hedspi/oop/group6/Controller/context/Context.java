@@ -1,5 +1,7 @@
 package hedspi.oop.group6.Controller.context;
 
+import hedspi.oop.group6.Controller.Drawing;
+import hedspi.oop.group6.Controller.HiddenController;
 import hedspi.oop.group6.ModelFX.DirectedEdgeFX;
 import hedspi.oop.group6.ModelFX.NodeFX;
 import hedspi.oop.group6.model.algorithm.Algorithm;
@@ -17,6 +19,11 @@ public abstract class Context implements Runnable{
     protected AlgorithmResult result = null;
 
 
+    public void setHiddenController(HiddenController hiddenController) {
+        this.hiddenController = hiddenController;
+    }
+
+    protected HiddenController hiddenController;
 
     public Algorithm getAlgorithm() {
         return algorithm;

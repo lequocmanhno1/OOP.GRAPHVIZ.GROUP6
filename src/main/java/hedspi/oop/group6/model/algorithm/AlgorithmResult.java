@@ -12,6 +12,10 @@ public class AlgorithmResult {
 
     private final List<DetailStep> detailSteps = new ArrayList<>();
 
+    public DetailStep getFinalResult() {
+        return finalResult;
+    }
+
     private DetailStep finalResult;
 
     public List<DetailStep> getDetailSteps() {

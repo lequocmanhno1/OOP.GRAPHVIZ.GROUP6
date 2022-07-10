@@ -21,6 +21,7 @@ public class BFSContext extends Context{
             } catch (Exception e){
                 e.printStackTrace();
             }
+            hiddenController.writeTextDetail(detailStep.getDetail());
 
             if(detailStep instanceof VertexStep){
                 VertexStep vertexStep = (VertexStep) detailStep;
@@ -41,9 +42,9 @@ public class BFSContext extends Context{
                 myEdge.setFill(Color.ORANGE);
 
             }
-            //
-
         }
+
+        hiddenController.writeTextDetail(result.getFinalResult().getDetail());
     }
 
 }

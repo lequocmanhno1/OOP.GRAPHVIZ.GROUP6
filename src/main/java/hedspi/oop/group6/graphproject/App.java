@@ -21,10 +21,6 @@ public class App extends Application {
             Scene menu = new Scene(root, 1400, 600);
 
 
-
-//            primaryStage.setTitle("Graph Visualizer");
-//            primaryStage.setScene(menu);
-//            primaryStage.show();
             window.setTitle("Graph Visualizer");
             window.setScene(menu);
             window.show();

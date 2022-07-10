@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -22,7 +23,10 @@
             </Label>
             <ScrollPane fx:id="DetailCont" prefHeight="400.0" prefWidth="300.0">
                <content>
-                  <TextFlow fx:id="textDetail" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #dfe6e9;" />
+                  <TextFlow fx:id="textDetail" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #dfe6e9;">
+                     <children>
+                        <TextArea fx:id="detailTextArea" disable="true" editable="false" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #dfe6e9;" />
+                     </children></TextFlow>
                </content>
             </ScrollPane>
             <Label alignment="CENTER" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #b2bec3;" text="Pseudo" underline="true">
@@ -32,7 +36,10 @@
             </Label>
             <ScrollPane fx:id="psudoCont" maxWidth="300.0" prefHeight="220.0">
                <content>
-                  <TextFlow fx:id="psudoFlow" prefHeight="220.0" prefWidth="300.0" style="-fx-background-color: #dfe6e9;" />
+                  <TextFlow fx:id="psudoFlow" prefHeight="220.0" prefWidth="300.0" style="-fx-background-color: #dfe6e9;">
+                     <children>
+                        <TextArea fx:id="pseudoTextArea" disable="true" editable="false" prefHeight="220.0" prefWidth="300.0" />
+                     </children></TextFlow>
                </content>
             </ScrollPane>
          </children>
