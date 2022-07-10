@@ -145,8 +145,6 @@ public class Drawing implements Initializable {
         context.setVertexes(vertexes);
         context.setHiddenController(hiddenController);
 
-//        context.visualize();
-
         Thread t1 = new Thread(context);
         t1.start();
     }
