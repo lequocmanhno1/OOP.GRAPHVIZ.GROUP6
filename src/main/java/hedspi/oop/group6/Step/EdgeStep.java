@@ -4,10 +4,25 @@
  */
 package hedspi.oop.group6.Step;
 
+import hedspi.oop.group6.model.graph.Edge;
+
 /**
  *
  * @author Trung
  */
-public class EdgeStep {
-    
+public class EdgeStep extends DetailStep {
+
+    private Edge edge;
+
+    public EdgeStep() {
+
+    }
+
+    public void setEdge(Edge edge) {
+        this.edge = edge;
+    }
+
+    public Edge getEdge() {
+        return edge;
+    }
 }

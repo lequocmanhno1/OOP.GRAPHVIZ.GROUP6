@@ -1,6 +1,4 @@
-package hedspi.oop.group6.Model;
-
-import javafx.scene.shape.Circle;
+package hedspi.oop.group6.model.graph;
 
 public class Vertex{
 

@@ -18,7 +18,7 @@ public class App extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Draw.fxml"));
             window = primaryStage;
             Parent root = fxmlLoader.load();
-            Scene menu = new Scene(root, 1000, 600);
+            Scene menu = new Scene(root, 1400, 600);
 
 
 

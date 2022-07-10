@@ -9,6 +9,4 @@ package hedspi.oop.group6.Step;
  * @author Trung
  */
 public class Step {
-    
-    
 }

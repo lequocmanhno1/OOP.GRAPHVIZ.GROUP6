@@ -1,6 +1,6 @@
 package hedspi.oop.group6.ModelFX;
 
-import hedspi.oop.group6.Model.Edge;
+import hedspi.oop.group6.model.graph.Edge;
 import javafx.scene.shape.Path;
 
 public abstract class EdgeFX extends Path {

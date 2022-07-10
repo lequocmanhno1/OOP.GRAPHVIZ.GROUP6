@@ -1,11 +1,11 @@
 package hedspi.oop.group6.graphproject;
 
-import hedspi.oop.group6.Controller.Context;
-import hedspi.oop.group6.Model.Graph;
-import hedspi.oop.group6.View.Algorithm;
-import hedspi.oop.group6.View.BFS;
-import hedspi.oop.group6.View.BipartiteGraph;
-import hedspi.oop.group6.View.SCC;
+import hedspi.oop.group6.Controller.context.Context;
+import hedspi.oop.group6.model.graph.Graph;
+import hedspi.oop.group6.model.algorithm.Algorithm;
+import hedspi.oop.group6.model.algorithm.BFS;
+import hedspi.oop.group6.model.algorithm.BipartiteGraph;
+import hedspi.oop.group6.model.algorithm.SCC;
 
 import java.util.Scanner;
 
@@ -37,7 +37,8 @@ public class GraphProject {
 
     public static void main(String[] args) {
         Graph g = new Graph();
-        Context context = new Context();
+        //
+        Context context = null;
 
         int choice;
         Scanner sc = new Scanner(System.in);
@@ -115,7 +116,7 @@ public class GraphProject {
                     int id = Integer.parseInt(sc.nextLine());
                     algorithm.setSourceVertex(g.findVertex(id));
                     context.setAlgorithm(algorithm);
-                    context.run();
+                    context.execute();
                     break;
                 case 4 :
                     Algorithm test = new BipartiteGraph(g);
@@ -123,7 +124,7 @@ public class GraphProject {
                     int idd = Integer.parseInt(sc.nextLine());
                     test.setSourceVertex(g.findVertex(idd));
                     context.setAlgorithm(test);
-                    context.run();
+                    context.execute();
                     break;
 
                 case 5 :
@@ -132,7 +133,7 @@ public class GraphProject {
                     int iid = Integer.parseInt(sc.nextLine());
                     test2.setSourceVertex(g.findVertex(iid));
                     context.setAlgorithm(test2);
-                    context.run();
+                    context.execute();
                     break;
                 case 0 : System.out.println("EXIT");
             }

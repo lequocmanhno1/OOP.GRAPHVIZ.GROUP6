@@ -1,6 +1,6 @@
 package hedspi.oop.group6.ModelFX;
 
-import hedspi.oop.group6.Model.Edge;
+import hedspi.oop.group6.model.graph.Edge;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;

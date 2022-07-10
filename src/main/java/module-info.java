@@ -15,4 +15,5 @@ module hedspi.oop.group6.graphproject {
 
     opens hedspi.oop.group6.Controller to javafx.fxml;
     exports hedspi.oop.group6.graphproject;
+    opens hedspi.oop.group6.Controller.context to javafx.fxml;
 }

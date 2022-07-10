@@ -1,7 +1,7 @@
 package hedspi.oop.group6.ModelFX;
 
 
-import hedspi.oop.group6.Model.Vertex;
+import hedspi.oop.group6.model.graph.Vertex;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;

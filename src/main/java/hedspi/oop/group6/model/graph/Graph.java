@@ -1,4 +1,4 @@
-package hedspi.oop.group6.Model;
+package hedspi.oop.group6.model.graph;
 
 import java.util.ArrayList;
 import java.util.List;

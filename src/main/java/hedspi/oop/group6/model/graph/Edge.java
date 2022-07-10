@@ -1,4 +1,4 @@
-package hedspi.oop.group6.Model;
+package hedspi.oop.group6.model.graph;
 
 public class Edge implements Comparable<Edge>{
     private Vertex from;

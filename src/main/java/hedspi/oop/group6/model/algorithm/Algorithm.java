@@ -1,7 +1,7 @@
-package hedspi.oop.group6.View;
+package hedspi.oop.group6.model.algorithm;
 
-import hedspi.oop.group6.Model.Graph;
-import hedspi.oop.group6.Model.Vertex;
+import hedspi.oop.group6.model.graph.Graph;
+import hedspi.oop.group6.model.graph.Vertex;
 import hedspi.oop.group6.Step.Step;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,7 @@ public abstract class Algorithm {
     
     private Vertex sourceVertex;
     protected List<Step> listOfSteps = new ArrayList<>();
+
     
     public abstract void createSteps();
 
@@ -52,5 +53,5 @@ public abstract class Algorithm {
     
     
     
-    public abstract void traversal();
+    public abstract AlgorithmResult traversal();
 }

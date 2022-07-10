@@ -14,6 +14,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -24,17 +25,12 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.HiddenSidesPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hedspi.oop.group6.Controller.Drawing">
+<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hedspi.oop.group6.Controller.Drawing">
     <children>
         <StackPane fx:id="stackRoot" prefHeight="620.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
         <AnchorPane fx:id="anchorRoot" layoutX="1.0" layoutY="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <Pane fx:id="border" layoutX="199.0" prefHeight="620.0" prefWidth="701.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                <HiddenSidesPane fx:id="hiddenPane" layoutX="200.0" layoutY="-3.0" prefHeight="628.0" prefWidth="701.0" style="-fx-background-color: #E0E0E0;" AnchorPane.bottomAnchor="-5.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-3.0">
-                    <cursor>
-                        <Cursor fx:constant="CROSSHAIR" />
-                    </cursor>
-                </HiddenSidesPane>
                 <AnchorPane prefHeight="580.0" prefWidth="200.0" style="-fx-background-color: #3b5998;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
                         <HBox alignment="CENTER" layoutX="10.0" layoutY="519.0" prefHeight="61.0" prefWidth="181.0" spacing="10.0" AnchorPane.bottomAnchor="0.0">
@@ -167,16 +163,25 @@
                   <ChoiceBox fx:id="choiceExGraph" layoutX="26.0" layoutY="358.0" prefWidth="150.0" />
                     </children>
                 </AnchorPane>
+                <Group fx:id="canvasGroup" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="202.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Pane fx:id="viewer" layoutX="3.0" onMouseClicked="#handle" prefHeight="1080.0" prefWidth="1720.0" style="-fx-background-color: #E0E0E0;">
+                            <cursor>
+                                <Cursor fx:constant="CROSSHAIR" />
+                            </cursor>
+                        </Pane>
+                    </children>
+                </Group>
             </children>
         </AnchorPane>
-          <Group fx:id="canvasGroup" layoutX="200.0">
-              <children>
-                  <Pane fx:id="viewer" layoutX="2.0" onMouseClicked="#handle" prefHeight="627.0" prefWidth="702.0" style="-fx-background-color: #E0E0E0;">
-                      <cursor>
-                          <Cursor fx:constant="CROSSHAIR" />
-                      </cursor>
-               <children>
-                      <ImageView fx:id="openHidden" fitHeight="44.0" fitWidth="65.0" layoutX="661.0" layoutY="297.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+      <BorderPane layoutX="935.0" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="628.0" prefWidth="76.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <right>
+            <JFXButton fx:id="showHidden" onAction="#showHiddenPane" prefHeight="52.0" prefWidth="28.0" text=" " BorderPane.alignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                      <ImageView fx:id="openHidden" fitHeight="44.0" fitWidth="65.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                           <image>
                               <Image url="@../../../../images/openHidden.png" />
                           </image>
@@ -184,14 +189,14 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                       </ImageView>
-                  <JFXButton fx:id="showHidden" layoutX="675.0" layoutY="308.0" text=" ">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </JFXButton>
-               </children>
-                  </Pane>
-              </children>
-          </Group>
+               </graphic>
+            </JFXButton>
+         </right>
+      </BorderPane>
+      <HiddenSidesPane fx:id="hiddenPane" prefHeight="1080.0" prefWidth="300.0" style="-fx-background-color: #E0E0E0; -fx-border-color: #000000; -fx-border-width: 0 0 0 1;" AnchorPane.rightAnchor="50.0">
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+      </HiddenSidesPane>
     </children>
 </AnchorPane>

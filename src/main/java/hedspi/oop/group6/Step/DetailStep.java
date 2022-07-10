@@ -4,8 +4,8 @@
  */
 package hedspi.oop.group6.Step;
 
-import hedspi.oop.group6.Model.Edge;
-import hedspi.oop.group6.Model.Vertex;
+import hedspi.oop.group6.model.graph.Edge;
+import hedspi.oop.group6.model.graph.Vertex;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -14,7 +14,7 @@ import java.util.Stack;
  * @author Trung
  */
 public class DetailStep extends Step{
-    private String detail;
+    protected String detail;
 
     public DetailStep() {
     }

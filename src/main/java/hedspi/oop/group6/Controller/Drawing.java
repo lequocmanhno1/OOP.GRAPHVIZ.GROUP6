@@ -3,18 +3,22 @@ package hedspi.oop.group6.Controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXNodesList;
 import com.jfoenix.controls.JFXToggleButton;
-import hedspi.oop.group6.Model.Edge;
-import hedspi.oop.group6.Model.Graph;
-import hedspi.oop.group6.Model.Vertex;
+import hedspi.oop.group6.Controller.context.BFSContext;
+import hedspi.oop.group6.Controller.context.Context;
+import hedspi.oop.group6.model.graph.Graph;
+import hedspi.oop.group6.model.graph.Vertex;
 import hedspi.oop.group6.ModelFX.DirectedEdgeFX;
 import hedspi.oop.group6.ModelFX.NodeFX;
-import hedspi.oop.group6.View.Algorithm;
-import hedspi.oop.group6.View.BFS;
-import hedspi.oop.group6.View.BipartiteGraph;
-import hedspi.oop.group6.View.SCC;
+import hedspi.oop.group6.model.algorithm.Algorithm;
+import hedspi.oop.group6.model.algorithm.BFS;
+import hedspi.oop.group6.model.algorithm.BipartiteGraph;
+import hedspi.oop.group6.model.algorithm.SCC;
+import hedspi.oop.group6.graphproject.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Side;
 import javafx.scene.control.*;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
@@ -29,9 +33,11 @@ import org.controlsfx.control.HiddenSidesPane;
 import com.jfoenix.controls.JFXSlider;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.List;
+
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 
@@ -72,7 +78,7 @@ public class Drawing implements Initializable {
 
     @FXML
     private ChoiceBox<String> choiceExGraph;
-    private final String[] ExGraph = {"Drawing","CP3 4.9 DG", "Graph 8-24 Bit", "Graph 8-14 SCC" };
+    private final String[] ExGraph = {"Drawing", "CP3 4.9 DG", "Graph 8-24 Bit", "Graph 8-14 SCC"};
     @FXML
     private JFXButton clearButton;
 
@@ -88,7 +94,6 @@ public class Drawing implements Initializable {
     public ScrollPane textContainer = new ScrollPane();
 
     private int selectedVertex = -1;
-
 
 
     @FXML
@@ -121,17 +126,26 @@ public class Drawing implements Initializable {
     @FXML
     private Button runBtn;
 
+
     @FXML
-    void runAlgo(ActionEvent event){
-        if (sourceAlgo ==-1) {
+    void runAlgo(ActionEvent event) {
+        if (sourceAlgo == -1) {
             algorithm.setSourceVertex(g.findVertex(0));
         } else {
             algorithm.setSourceVertex(g.findVertex(sourceAlgo));
         }
         Collections.sort(algorithm.getGraph().getListOfEdges());
-//        g.printGraph();
         context.setAlgorithm(algorithm);
-        context.run();
+        context.execute();
+
+        context.setEdges(mstEdges);
+        context.setVertexes(vertexes);
+
+
+//        context.visualize();
+
+        Thread t1 = new Thread(context);
+        t1.start();
     }
 
     int nNode = 0;
@@ -145,47 +159,34 @@ public class Drawing implements Initializable {
     private Algorithm algorithm;
 
     @FXML
-    void AddHandle(ActionEvent event){
-        if(addVertexButton.isSelected()) {
+    void AddHandle(ActionEvent event) {
+        if (addVertexButton.isSelected()) {
             addEdgeButton.setSelected(false);
             selectedNode = null;
         }
-        if(addEdgeButton.isSelected()) {
+        if (addEdgeButton.isSelected()) {
             addVertexButton.setSelected(false);
         }
-//        if (nNode ==0 || addVertexButton.isSelected() || addEdgeButton.isSelected()){
-//            runBtn.setDisable(true);
-//        } else {
-//            runBtn.setDisable(false);
-//        }
     }
 
-    private Context context = new Context();
+    private Context context;
 
     private Graph g = new Graph();
+
     @FXML
     void BfsHandle(ActionEvent event) {
         algorithm = new BFS(g);
-
-//        algorithm.setSourceVertex(g.findVertex(sourceAlgo));
-//        context.setAlgorithm(algorithm);
-//        context.run();
+        context = new BFSContext();
     }
 
     @FXML
     void BitHandle(ActionEvent event) {
         algorithm = new BipartiteGraph(g);
-//        test.setSourceVertex(g.findVertex(sourceAlgo));
-//        context.setAlgorithm(test);
-//        context.run();
     }
 
     @FXML
     void SccHandle(ActionEvent event) {
         algorithm = new SCC(g);
-//        test2.setSourceVertex(g.findVertex(sourceAlgo));
-//        context.setAlgorithm(test2);
-//        context.run();
     }
 
     @FXML
@@ -206,20 +207,18 @@ public class Drawing implements Initializable {
         vertexes = new ArrayList<NodeFX>();
         addVertexButton.setSelected(false);
         addEdgeButton.setSelected(false);
-//        addEdgeButton.setDisable(true);
-//        addVertexButton.setDisable(false);
         nNode = 0;
     }
 
 
-
-    private int sourceAlgo=-1;
+    private int sourceAlgo = -1;
 
     long start = System.currentTimeMillis();
+
     @FXML
     void handle(MouseEvent event) {
         long time = System.currentTimeMillis() - start;
-        if (!addVertexButton.isSelected() ||  event.getEventType() != MouseEvent.MOUSE_CLICKED || time < 100) return;
+        if (!addVertexButton.isSelected() || event.getEventType() != MouseEvent.MOUSE_CLICKED || time < 100) return;
 
         double x = event.getX();
         double y = event.getY();
@@ -229,7 +228,7 @@ public class Drawing implements Initializable {
 
         nodeFX.setOnMouseClicked((mouseEvent -> {
             // add Edge
-            if(selectedVertex != -1 && addEdgeButton.isSelected()){
+            if (selectedVertex != -1 && addEdgeButton.isSelected()) {
                 NodeFX vertexFrom = vertexes.get(selectedVertex);
                 NodeFX vertexTo = nodeFX;
                 DirectedEdgeFX directedArrow = new DirectedEdgeFX(vertexFrom, vertexTo);
@@ -244,8 +243,8 @@ public class Drawing implements Initializable {
 
 
             // Choose source vertex
-            if(addEdgeButton.isSelected() == false && addVertexButton.isSelected() == false){
-                if(nodeFX.getVertex().getColor() == -1) {
+            if (addEdgeButton.isSelected() == false && addVertexButton.isSelected() == false) {
+                if (nodeFX.getVertex().getColor() == -1) {
                     if (sourceAlgo != -1) {
                         vertexes.get(sourceAlgo).getVertex().setColor(-1);
                         vertexes.get(sourceAlgo).setFill(Color.GRAY);
@@ -286,10 +285,18 @@ public class Drawing implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-            openHidden.setImage(getImage("openHidden.png"));
-            playPauseImage.setImage(getImage("pause_black_48x48.png"));
-            FastForwardImage.setImage(getImage("fast_forward_black_48x48.png"));
-            choiceExGraph.getItems().addAll(ExGraph);
+        openHidden.setImage(getImage("openHidden.png"));
+        playPauseImage.setImage(getImage("pause_black_48x48.png"));
+        FastForwardImage.setImage(getImage("fast_forward_black_48x48.png"));
+        choiceExGraph.getItems().addAll(ExGraph);
+        URL url1 = App.class.getResource("HidenPanel.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader(url1);
+        try {
+            hiddenRoot = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     private JFXSlider slider = new JFXSlider();
@@ -302,5 +309,21 @@ public class Drawing implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
+    private boolean isHiddenPaneVisible = false;
+    @FXML
+    void showHiddenPane(ActionEvent event) {
+        if(!isHiddenPaneVisible){
+            hiddenPane.setContent(hiddenRoot);
+            hiddenPane.show(Side.RIGHT);
+            isHiddenPaneVisible = true;
+        } else {
+            hiddenPane.setContent(null);
+            hiddenPane.hide();
+            isHiddenPaneVisible = false;
+        }
+
+    }
+
 }
 

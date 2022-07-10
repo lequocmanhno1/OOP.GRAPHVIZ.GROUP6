@@ -2,15 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package hedspi.oop.group6.View;
+package hedspi.oop.group6.model.algorithm;
 
-import hedspi.oop.group6.Model.Graph;
-import hedspi.oop.group6.Model.Vertex;
+import hedspi.oop.group6.model.graph.Graph;
+import hedspi.oop.group6.model.graph.Vertex;
 import hedspi.oop.group6.Step.DetailStep;
 import hedspi.oop.group6.Step.PseudoStep;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import java.util.regex.PatternSyntaxException;
 
 /**
  *
@@ -141,12 +142,20 @@ public class SCC extends Algorithm{
     }
 
     @Override
-    public void traversal() {
+    public AlgorithmResult traversal() {
         int scc = 0;
+        AlgorithmResult algorithmResult = new AlgorithmResult();
         Stack<Vertex> s1 = new Stack<Vertex>();
         List<Vertex> Visit = new ArrayList<>();
-        System.out.println(((DetailStep)super.getListOfSteps().get(7)).toStringV(super.getSourceVertex()) + ((DetailStep)super.getListOfSteps().get(8)).toString());
-        System.out.println(super.getListOfSteps().get(0).toString()); 
+
+        DetailStep detailStep1= new DetailStep(((DetailStep)super.getListOfSteps().get(7)).toStringV(super.getSourceVertex()) + ((DetailStep)super.getListOfSteps().get(8)).toString());
+        System.out.println(detailStep1.getDetail());
+        algorithmResult.addDetailStep(detailStep1);
+
+        PseudoStep pseudoStep1 = new PseudoStep(super.getListOfSteps().get(0).toString());
+        System.out.println(pseudoStep1.getComporseStep());
+        algorithmResult.addPseudoStep(pseudoStep1);
+
         this.DFS(super.getGraph(), super.getSourceVertex(), Visit, s1);
         for(int i=0 ; i < super.getGraph().getListOfVertexs().size() ; i++){
             if(Visit.contains(super.getGraph().getListOfVertexs().get(i)) ==false){
@@ -157,15 +166,24 @@ public class SCC extends Algorithm{
         List<Vertex> list = new ArrayList<>();
         Vertex v = new Vertex();
         Stack<Vertex> s2 = new Stack<Vertex>();
-        Graph g = reverseGraph(super.getGraph()); // transpose the graph
-        System.out.println(((DetailStep)super.getListOfSteps().get(16)).toString());
-        System.out.println(super.getListOfSteps().get(3).toString()); 
+        Graph g = reverseGraph(super.getGraph());
+
+        // transpose the graph to directed?
+        DetailStep detailStep2 = new DetailStep(((DetailStep)super.getListOfSteps().get(16)).toString());
+        System.out.println(detailStep2.getDetail());
+        algorithmResult.addDetailStep(detailStep2);
+
+        PseudoStep pseudoStep2 = new PseudoStep(super.getListOfSteps().get(3).toString());
+        System.out.println(pseudoStep2.getComporseStep());
+        algorithmResult.addPseudoStep(pseudoStep2);
+
         while(!s1.empty()){
             v = s1.peek();
             list.removeAll(list);
             if(!Visit2.contains(v)){
                 this.DFSDao(g, v, Visit2, s2, s1);
             }else{
+
                 System.out.println(((DetailStep)super.getListOfSteps().get(9)).toStringS(s1) 
                     + ((DetailStep)super.getListOfSteps().get(10)).toString());
                 System.out.println(((DetailStep)super.getListOfSteps().get(21)).toStringV(v) 
@@ -190,6 +208,7 @@ public class SCC extends Algorithm{
         System.out.println(((DetailStep)super.getListOfSteps().get(24)).toString());
         System.out.println(((DetailStep)super.getListOfSteps().get(25)).toString() + scc 
             + ((DetailStep)super.getListOfSteps().get(26)).toString());
+        return null;
     }
     
 }
