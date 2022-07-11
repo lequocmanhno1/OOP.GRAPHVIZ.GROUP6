@@ -41,7 +41,7 @@ public class BFS extends Algorithm {
         listOfSteps.add(new DetailStep(" is explored, we ignore this non-tree edge."));
 
         listOfSteps.add(new DetailStep("BFS("));
-        listOfSteps.add(new DetailStep(") is completed. Red/grey edge is tree/non-tree edge of the BFS & SSSP spanning tree (for unweighted graph)."));
+        listOfSteps.add(new DetailStep(") is completed. "));
     }
 
     private boolean checkVisit(List<Vertex> Visit, Vertex v) {

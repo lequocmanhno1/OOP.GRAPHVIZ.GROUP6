@@ -192,7 +192,13 @@ public class Drawing implements Initializable {
 
     @FXML
     void ClearHandle(ActionEvent event) {
-
+        canvasGroup.getChildren().clear();
+        canvasGroup.getChildren().addAll(viewer);
+        selectedNode = null;
+        vertexes = new ArrayList<NodeFX>();
+        addVertexButton.setSelected(false);
+        addEdgeButton.setSelected(false);
+        nNode = 0;
     }
 
     @FXML
@@ -202,13 +208,12 @@ public class Drawing implements Initializable {
 
     @FXML
     void ResetHandle(ActionEvent event) {
-        canvasGroup.getChildren().clear();
-        canvasGroup.getChildren().addAll(viewer);
-        selectedNode = null;
-        vertexes = new ArrayList<NodeFX>();
-        addVertexButton.setSelected(false);
-        addEdgeButton.setSelected(false);
-        nNode = 0;
+        for (NodeFX nodeFX: vertexes){
+            nodeFX.setFill(Color.GRAY);
+        }
+        for (DirectedEdgeFX directedEdgeFX: mstEdges){
+            directedEdgeFX.setFill(Color.BLACK);
+        }
     }
 
 

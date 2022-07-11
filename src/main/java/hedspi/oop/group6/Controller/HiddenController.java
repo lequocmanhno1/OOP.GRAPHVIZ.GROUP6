@@ -1,5 +1,6 @@
 package hedspi.oop.group6.Controller;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -32,13 +33,20 @@ public class HiddenController {
     private final List<Label> pseudoLabels = new ArrayList<>();
 
     public int writeTextDetail(String content){
-        Label label = new Label(content);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Label label = new Label(content);
 //        label.setStyle("-fx-font-weight: bold; -fx-text-fill: white;");
 //        label.setFont(new Font("Roboto",15));
-        label.setMinWidth(300);
-        detailLabels.add(label);
-        detailFlow.getChildren().add(label);
+                label.setMinWidth(300);
+                detailLabels.add(label);
+                detailFlow.getChildren().add(label);
+
+            }
+        });
         return detailLabels.size() - 1;
+
     }
 
 }
