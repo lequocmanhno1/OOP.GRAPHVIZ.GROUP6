@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Algorithm {
-    private Graph graph;
-    
-    private Vertex sourceVertex;
+    protected Graph graph;
+
+    protected Vertex sourceVertex;
     protected List<Step> listOfSteps = new ArrayList<>();
 
     

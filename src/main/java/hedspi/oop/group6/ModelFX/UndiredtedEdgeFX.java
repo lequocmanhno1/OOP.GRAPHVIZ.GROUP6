@@ -6,18 +6,12 @@ import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 
 public class UndiredtedEdgeFX extends EdgeFX{
-    private Edge reEdge;
-
-    public Edge getReEdge() {
-        return reEdge;
-    }
 
     public UndiredtedEdgeFX(NodeFX vertexFrom, NodeFX vertexTo) {
         super(vertexFrom, vertexTo);
         this.vertexFrom = vertexFrom;
         this.vertexTo = vertexTo;
         this.edge = new Edge(vertexFrom.getVertex(), vertexTo.getVertex());
-        this.reEdge = new Edge(vertexTo.getVertex(), vertexFrom.getVertex());
         double startX = vertexFrom.getCenterX();
         double startY = vertexFrom.getCenterY();
         double endX = vertexTo.getCenterX();

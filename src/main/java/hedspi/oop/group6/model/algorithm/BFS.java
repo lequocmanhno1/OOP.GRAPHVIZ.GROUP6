@@ -2,6 +2,7 @@ package hedspi.oop.group6.model.algorithm;
 
 import hedspi.oop.group6.Step.EdgeStep;
 import hedspi.oop.group6.Step.VertexStep;
+import hedspi.oop.group6.model.graph.Edge;
 import hedspi.oop.group6.model.graph.Graph;
 import hedspi.oop.group6.model.graph.Vertex;
 import hedspi.oop.group6.Step.DetailStep;
@@ -93,13 +94,13 @@ public class BFS extends Algorithm {
             pseudoStep2.setComporseStep(a15);
             System.out.println(a15);
             algorithmResult.addPseudoStep(pseudoStep2);
-
-            for (int i = 0; i < super.getGraph().getListOfEdges().size(); i++) {
-                if (s.getVertexId() == super.getGraph().getListOfEdges().get(i).getFrom().getVertexId()) {
+            List<Edge> neighbors = graph.getNeighborsVertex(s);
+            for (int i = 0; i < neighbors.size(); i++) {
+//                if (s.getVertexId() == super.getGraph().getListOfEdges().get(i).getFrom().getVertexId()) {
                     EdgeStep detailStep4 = new EdgeStep();
-                    detailStep4.setDetail(((DetailStep) super.getListOfSteps().get(9)).toStringE(super.getGraph().getListOfEdges().get(i)));
+                    detailStep4.setDetail(((DetailStep) super.getListOfSteps().get(9)).toStringE(neighbors.get(i)));
                     System.out.println(detailStep4.getDetail());
-                    detailStep4.setEdge(super.getGraph().getListOfEdges().get(i));
+                    detailStep4.setEdge(neighbors.get(i));
                     algorithmResult.addDetailStep(detailStep4);
 
                     PseudoStep pseudoStep4 = new PseudoStep();
@@ -107,27 +108,27 @@ public class BFS extends Algorithm {
                     System.out.println(pseudoStep4.getComporseStep());
                     algorithmResult.addPseudoStep(pseudoStep4);
 
-                    if (!checkVisit(Visit, super.getGraph().getListOfEdges().get(i).getTo())) {
-                        if (!Queue.contains(super.getGraph().getListOfEdges().get(i).getTo())) {
+                    if (!checkVisit(Visit, neighbors.get(i).getTo())) {
+                        if (!Queue.contains(neighbors.get(i).getTo())) {
 
-                            String s10 = ((DetailStep) super.getListOfSteps().get(10)).toStringV(super.getGraph().getListOfEdges().get(i).getTo())
+                            String s10 = ((DetailStep) super.getListOfSteps().get(10)).toStringV(neighbors.get(i).getTo())
                                     + super.getListOfSteps().get(11);
                             System.out.println(s10);
 
 
                             VertexStep detailStep5 = new VertexStep();
                             detailStep5.setDetail(s10);
-                            detailStep5.setVertex(super.getGraph().getListOfEdges().get(i).getTo());
+                            detailStep5.setVertex(neighbors.get(i).getTo());
                             algorithmResult.addDetailStep(detailStep5);
 
                             PseudoStep pseudoStep5 = new PseudoStep();
                             pseudoStep5.setComporseStep(super.getListOfSteps().get(3).toString());
                             System.out.println(pseudoStep5.getComporseStep());
                             algorithmResult.addPseudoStep(pseudoStep5);
-                            Queue.add(super.getGraph().getListOfEdges().get(i).getTo());
+                            Queue.add(neighbors.get(i).getTo());
 
                         } else {
-                            String s10 = ((DetailStep) super.getListOfSteps().get(10)).toStringV(super.getGraph().getListOfEdges().get(i).getTo())
+                            String s10 = ((DetailStep) super.getListOfSteps().get(10)).toStringV(neighbors.get(i).getTo())
                                     + super.getListOfSteps().get(12);
                             System.out.println(s10);
 
@@ -141,7 +142,7 @@ public class BFS extends Algorithm {
                             algorithmResult.addPseudoStep(pseudoStep6);
                         }
                     } else {
-                        String s10 = ((DetailStep) super.getListOfSteps().get(10)).toStringV(super.getGraph().getListOfEdges().get(i).getTo())
+                        String s10 = ((DetailStep) super.getListOfSteps().get(10)).toStringV(neighbors.get(i).getTo())
                                 + super.getListOfSteps().get(12);
                         System.out.println(s10);
 
@@ -154,7 +155,6 @@ public class BFS extends Algorithm {
                         System.out.println(pseudoStep6.getComporseStep());
                         algorithmResult.addPseudoStep(pseudoStep6);
                     }
-                }
             }
             Queue.poll();
         }

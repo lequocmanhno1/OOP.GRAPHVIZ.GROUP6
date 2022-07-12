@@ -8,7 +8,9 @@ import hedspi.oop.group6.Controller.context.BitContext;
 import hedspi.oop.group6.Controller.context.Context;
 import hedspi.oop.group6.ModelFX.EdgeFX;
 import hedspi.oop.group6.ModelFX.UndiredtedEdgeFX;
+import hedspi.oop.group6.model.graph.DirectedGraph;
 import hedspi.oop.group6.model.graph.Graph;
+import hedspi.oop.group6.model.graph.UndirectedGraph;
 import hedspi.oop.group6.model.graph.Vertex;
 import hedspi.oop.group6.ModelFX.DirectedEdgeFX;
 import hedspi.oop.group6.ModelFX.NodeFX;
@@ -148,11 +150,8 @@ public class Drawing implements Initializable {
         context.setAlgorithm(algorithm);
         context.execute();
 
-        if (!mstEdges.isEmpty()){
+
         context.setEdges(mstEdges);
-        } else {
-            //context.setEdges(unmstEdges);
-        }
         context.setVertexes(vertexes);
         context.setHiddenController(hiddenController);
 
@@ -163,8 +162,8 @@ public class Drawing implements Initializable {
     int nNode = 0;
     NodeFX selectedNode = null;
     List<NodeFX> vertexes = new ArrayList<>();
-    List<DirectedEdgeFX> mstEdges = new ArrayList<>();
-    List<UndiredtedEdgeFX> unmstEdges = new ArrayList<>();
+    List<EdgeFX> mstEdges = new ArrayList<>();
+
 
     boolean addNode = true, addEdge = false, calculate = false,
             calculated = false, playing = false, paused = false, pinned = false;
@@ -191,6 +190,19 @@ public class Drawing implements Initializable {
 
     @FXML
     void BfsHandle(ActionEvent event) {
+        if(mstEdges.size() > 0){
+            Graph temp;
+            if(mstEdges.get(0) instanceof DirectedEdgeFX){
+                temp = new DirectedGraph();
+            } else {
+                temp = new UndirectedGraph();
+            }
+            temp.addVertexs(g.getListOfVertexs());
+            temp.addEdges(g.getListOfEdges());
+            g = temp;
+        } else {
+            return;
+        }
         algorithm = new BFS(g);
         context = new BFSContext();
     }
@@ -212,14 +224,12 @@ public class Drawing implements Initializable {
         canvasGroup.getChildren().addAll(viewer);
         selectedNode = null;
         vertexes = new ArrayList<NodeFX>();
+        mstEdges = new ArrayList<EdgeFX>();
+        g = new Graph();
         addVertexButton.setSelected(false);
         addEdgeButton.setSelected(false);
+        hiddenController.clear();
         nNode = 0;
-    }
-
-    @FXML
-    void PlayPauseHandle(ActionEvent event) {
-
     }
 
     @FXML
@@ -227,9 +237,15 @@ public class Drawing implements Initializable {
         for (NodeFX nodeFX: vertexes){
             nodeFX.setFill(Color.GRAY);
         }
-        for (DirectedEdgeFX directedEdgeFX: mstEdges){
-            directedEdgeFX.setFill(Color.BLACK);
+        for (EdgeFX edgeFX:  mstEdges){
+            edgeFX.setFill(Color.BLACK);
         }
+        hiddenController.clear();
+    }
+
+    @FXML
+    void PlayPauseHandle(ActionEvent event) {
+
     }
 
 
@@ -258,13 +274,12 @@ public class Drawing implements Initializable {
                 mstEdges.add(directedEdgeFX);
                 canvasGroup.getChildren().add(directedEdgeFX);
                 selectedVertex = -1;
-            } else if (selectedVertex != -1 && addEdgeButton.isSelected()) {
+            } else if (selectedVertex != -1 && addEdgeButton.isSelected() && !isDirected.isSelected()) {
                 NodeFX vertexFrom = vertexes.get(selectedVertex);
                 NodeFX vertexTo = nodeFX;
                 UndiredtedEdgeFX undiredtedEdgeFX = new UndiredtedEdgeFX(vertexFrom, vertexTo);
                 g.addEdge(undiredtedEdgeFX.getEdge());
-                g.addEdge(undiredtedEdgeFX.getReEdge());
-                unmstEdges.add(undiredtedEdgeFX);
+                mstEdges.add(undiredtedEdgeFX);
                 canvasGroup.getChildren().add(undiredtedEdgeFX);
                 selectedVertex = -1;
             } else {

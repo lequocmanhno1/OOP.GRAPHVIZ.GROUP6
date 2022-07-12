@@ -5,10 +5,20 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Graph {
-    private final List<Vertex> listOfVertexs = new ArrayList<>();
-    private final List<Edge> listOfEdges = new ArrayList<>();
+    protected final List<Vertex> listOfVertexs = new ArrayList<>();
+    protected final List<Edge> listOfEdges = new ArrayList<>();
 
     public Graph() {
+    }
+
+    public List<Edge> getNeighborsVertex(Vertex vertex){
+//        List<Vertex> neighbors = new ArrayList<>();
+//        for(Edge edge: listOfEdges){
+//            if(edge.getFrom().equals(vertex)){
+//                neighbors.add(edge.getTo());
+//            }
+//        }
+        return null;
     }
 
     public List<Vertex> getListOfVertexs() {
@@ -145,7 +155,7 @@ public class Graph {
     }
 
     public static Graph exampleGraph(int x) {
-        Graph g = new Graph();
+        Graph g = null;
         switch (x) {
             case 1:
                 for (int i = 0; i <= 7; i++) {
