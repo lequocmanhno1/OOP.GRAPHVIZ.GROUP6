@@ -119,6 +119,14 @@
                                         <Font name="Junction Regular Regular" size="13.0" />
                                     </font>
                                 </JFXToggleButton>
+                        <JFXToggleButton fx:id="isDirected" onAction="#AddHandle" prefHeight="58.0" prefWidth="143.0" text="Directed Graph" textFill="#d3c5c5">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="algoToggleGroup1" />
+                           </toggleGroup>
+                           <font>
+                              <Font name="Junction Regular Regular" size="13.0" />
+                           </font>
+                        </JFXToggleButton>
                             </children>
                             <padding>
                                 <Insets right="27.0" />
@@ -165,7 +173,7 @@
                 </AnchorPane>
                 <Group fx:id="canvasGroup" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="202.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <Pane fx:id="viewer" layoutX="3.0" onMouseClicked="#handle" prefHeight="1080.0" prefWidth="1720.0" style="-fx-background-color: #E0E0E0;">
+                        <Pane fx:id="viewer" layoutX="-11.0" onMouseClicked="#handle" prefHeight="1080.0" prefWidth="1720.0" style="-fx-background-color: #E0E0E0;">
                             <cursor>
                                 <Cursor fx:constant="CROSSHAIR" />
                             </cursor>

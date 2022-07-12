@@ -3,7 +3,9 @@ package hedspi.oop.group6.Controller.context;
 import hedspi.oop.group6.Controller.Drawing;
 import hedspi.oop.group6.Controller.HiddenController;
 import hedspi.oop.group6.ModelFX.DirectedEdgeFX;
+import hedspi.oop.group6.ModelFX.EdgeFX;
 import hedspi.oop.group6.ModelFX.NodeFX;
+import hedspi.oop.group6.ModelFX.UndiredtedEdgeFX;
 import hedspi.oop.group6.model.algorithm.Algorithm;
 import hedspi.oop.group6.model.algorithm.AlgorithmResult;
 
@@ -46,6 +48,10 @@ public abstract class Context implements Runnable{
     public void setEdges(List<DirectedEdgeFX> edges) {
         this.edges = edges;
     }
+
+//    public void setEdges(List<UndiredtedEdgeFX> edges) {
+//        this.edges = edges;
+//    }
 
     @Override
     public void run() {

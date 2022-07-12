@@ -4,7 +4,10 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXNodesList;
 import com.jfoenix.controls.JFXToggleButton;
 import hedspi.oop.group6.Controller.context.BFSContext;
+import hedspi.oop.group6.Controller.context.BitContext;
 import hedspi.oop.group6.Controller.context.Context;
+import hedspi.oop.group6.ModelFX.EdgeFX;
+import hedspi.oop.group6.ModelFX.UndiredtedEdgeFX;
 import hedspi.oop.group6.model.graph.Graph;
 import hedspi.oop.group6.model.graph.Vertex;
 import hedspi.oop.group6.ModelFX.DirectedEdgeFX;
@@ -131,6 +134,10 @@ public class Drawing implements Initializable {
 
 
     @FXML
+    private JFXToggleButton isDirected;
+
+
+    @FXML
     void runAlgo(ActionEvent event) {
         if (sourceAlgo == -1) {
             algorithm.setSourceVertex(g.findVertex(0));
@@ -141,7 +148,11 @@ public class Drawing implements Initializable {
         context.setAlgorithm(algorithm);
         context.execute();
 
+        if (!mstEdges.isEmpty()){
         context.setEdges(mstEdges);
+        } else {
+            //context.setEdges(unmstEdges);
+        }
         context.setVertexes(vertexes);
         context.setHiddenController(hiddenController);
 
@@ -153,6 +164,7 @@ public class Drawing implements Initializable {
     NodeFX selectedNode = null;
     List<NodeFX> vertexes = new ArrayList<>();
     List<DirectedEdgeFX> mstEdges = new ArrayList<>();
+    List<UndiredtedEdgeFX> unmstEdges = new ArrayList<>();
 
     boolean addNode = true, addEdge = false, calculate = false,
             calculated = false, playing = false, paused = false, pinned = false;
@@ -167,6 +179,9 @@ public class Drawing implements Initializable {
         }
         if (addEdgeButton.isSelected()) {
             addVertexButton.setSelected(false);
+            isDirected.setDisable(false);
+        } else {
+            isDirected.setDisable(true);
         }
     }
 
@@ -183,6 +198,7 @@ public class Drawing implements Initializable {
     @FXML
     void BitHandle(ActionEvent event) {
         algorithm = new BipartiteGraph(g);
+        context = new BitContext();
     }
 
     @FXML
@@ -234,13 +250,22 @@ public class Drawing implements Initializable {
 
         nodeFX.setOnMouseClicked((mouseEvent -> {
             // add Edge
-            if (selectedVertex != -1 && addEdgeButton.isSelected()) {
+            if (selectedVertex != -1 && addEdgeButton.isSelected() && isDirected.isSelected()) {
                 NodeFX vertexFrom = vertexes.get(selectedVertex);
                 NodeFX vertexTo = nodeFX;
-                DirectedEdgeFX directedArrow = new DirectedEdgeFX(vertexFrom, vertexTo);
-                g.addEdge(directedArrow.getEdge());
-                mstEdges.add(directedArrow);
-                canvasGroup.getChildren().add(directedArrow);
+                DirectedEdgeFX directedEdgeFX = new DirectedEdgeFX(vertexFrom, vertexTo);
+                g.addEdge(directedEdgeFX.getEdge());
+                mstEdges.add(directedEdgeFX);
+                canvasGroup.getChildren().add(directedEdgeFX);
+                selectedVertex = -1;
+            } else if (selectedVertex != -1 && addEdgeButton.isSelected()) {
+                NodeFX vertexFrom = vertexes.get(selectedVertex);
+                NodeFX vertexTo = nodeFX;
+                UndiredtedEdgeFX undiredtedEdgeFX = new UndiredtedEdgeFX(vertexFrom, vertexTo);
+                g.addEdge(undiredtedEdgeFX.getEdge());
+                g.addEdge(undiredtedEdgeFX.getReEdge());
+                unmstEdges.add(undiredtedEdgeFX);
+                canvasGroup.getChildren().add(undiredtedEdgeFX);
                 selectedVertex = -1;
             } else {
                 this.selectedVertex = Integer.parseInt(nodeFX.getLabel().getText());
@@ -303,7 +328,7 @@ public class Drawing implements Initializable {
             throw new RuntimeException(e);
         }
         hiddenController = fxmlLoader.getController();
-
+        isDirected.setDisable(true);
     }
 
     private JFXSlider slider = new JFXSlider();
